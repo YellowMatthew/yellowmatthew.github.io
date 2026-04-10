@@ -177,14 +177,28 @@
     }
 
     section {
-      padding: 55px 0;
+      padding: 10px 0;
     }
 
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      color: var(--white);
-    }
+  .section-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 4px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+  }
+
 
     .section-desc {
       color: var(--subtext);
@@ -207,7 +221,6 @@
       border: 1px solid rgba(56, 189, 248, 0.2);
     }
 
-    /* 项目详情块 */
     .project-block {
       background: var(--card);
       border-radius: var(--radius);
@@ -217,9 +230,9 @@
       border: 1px solid rgba(148, 163, 184, 0.1);
     }
 
-    .project-header {
-      margin-bottom: 18px;
-    }
+    /*.project-header {*/
+    /*  margin-bottom: 18px;*/
+    /*}*/
 
     .project-header h3 {
       font-size: 1.6rem;
@@ -260,7 +273,6 @@
       font-weight: bold;
     }
 
-    /* 图片画廊 */
     .gallery-title,
     .video-title {
       margin-top: 20px;
@@ -275,26 +287,20 @@
       gap: 16px;
     }
 
-    .gallery a {
-      display: block;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #0b1220;
-      border: 1px solid rgba(148, 163, 184, 0.1);
-    }
-
     .gallery img {
       width: 100%;
       height: auto;
       cursor: zoom-in;
       transition: transform 0.3s ease;
+      border-radius: 14px;
+      background: #0b1220;
+      border: 1px solid rgba(148, 163, 184, 0.1);
     }
 
-    .gallery a:hover img {
+    .gallery img:hover {
       transform: scale(1.03);
     }
 
-    /* 视频列表 */
     .video-list {
       display: grid;
       grid-template-columns: 1fr;
@@ -319,6 +325,25 @@
       width: 100%;
       border-radius: 12px;
       margin-top: 8px;
+    }
+    .video-compare {
+      width: 100%;
+    }
+
+    .video-titles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .video-titles div {
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      background: rgba(255,255,255,0.05);
+      padding: 8px 6px;
+      border-radius: 8px;
     }
 
     .contact-box {
@@ -345,6 +370,99 @@
       font-size: 0.95rem;
     }
 
+    /* 图片弹窗 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.05s linear;
+      transform-origin: center center;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .modal img.dragging {
+      cursor: grabbing;
+    }
+
+
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      font-size: 42px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 1;
+      z-index: 2100;
+    }
+
+    .modal-close:hover {
+      color: #38bdf8;
+    }
+
+    .modal-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 52px;
+      color: white;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2100;
+      transition: background 0.3s ease;
+    }
+
+    .modal-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .modal-prev {
+      left: 24px;
+    }
+
+    .modal-next {
+      right: 24px;
+    }
+    .project-header {
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .modal-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 8px 14px;
+      border-radius: 999px;
+      max-width: 80%;
+      text-align: center;
+    }
+
     @media (max-width: 820px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -359,6 +477,22 @@
         gap: 12px;
       }
     }
+
+    @media (max-width: 768px) {
+      .modal-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 36px;
+      }
+
+      .modal-prev {
+        left: 10px;
+      }
+
+      .modal-next {
+        right: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -367,7 +501,7 @@
     <div class="container nav-inner">
       <div class="logo">My Portfolio</div>
       <div class="nav-links">
-        <a href="#about">关于</a>
+        <a href="#about">画像</a>
         <a href="#skills">技术栈</a>
         <a href="#projects">项目</a>
         <a href="#contact">联系</a>
@@ -378,167 +512,219 @@
   <header class="hero">
     <div class="container hero-grid">
       <div>
-        <h1>你好，我是 <span>你的名字</span></h1>
-        <p>
-          我是一名专注于网页开发、工具构建和创意项目实现的开发者。
-          这里是我的项目作品集，展示了我做过的一些应用、界面设计、实验项目和开发成果。
-        </p>
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#projects">查看项目</a>
-          <a class="btn btn-secondary" href="https://github.com/你的用户名" target="_blank">GitHub 主页</a>
-        </div>
+        <h1>你好，我是 <span>蓝月亮</span></h1>
+<!--        <p>-->
+<!--          我是一名专注于网页开发、工具构建和创意项目实现的开发者。-->
+<!--          这里是我的项目作品集，展示了我做过的一些应用、界面设计、实验项目和开发成果。-->
+<!--        </p>-->
+<!--        <div class="hero-buttons">-->
+<!--          <a class="btn btn-primary" href="#projects">查看项目</a>-->
+<!--          <a class="btn btn-secondary" href="https://github.com/你的用户名" target="_blank">GitHub 主页</a>-->
+<!--        </div>-->
       </div>
 
-      <div class="hero-card">
-        <img src="images/cover.jpg" alt="作品集封面图">
-        <h3>精选作品预览</h3>
-        <p>你可以在这里放一张项目截图、UI 设计图、应用界面图或者个人品牌封面图。</p>
-      </div>
+<!--      <div class="hero-card">-->
+<!--        <img src="images/cover.jpg" alt="作品集封面图">-->
+<!--        <h3>精选作品预览</h3>-->
+<!--        <p>你可以在这里放一张项目截图、UI 设计图、应用界面图或者个人品牌封面图。</p>-->
+<!--      </div>-->
     </div>
   </header>
 
   <main class="container">
 
     <section id="about">
-      <h2 class="section-title">关于我</h2>
+      <h2 class="section-title">用户画像</h2>
       <p class="section-desc">
-        我喜欢把想法快速变成可以运行的产品原型，关注交互体验、前端展示效果以及项目完整性。
-        我擅长使用现代 Web 技术构建作品集页面、工具网站、数据可视化页面和小型应用。
+        一个“图形学 + 视觉 + 生成式AI + 数字人”复合型牛马。<br>
+        Lead几个人脸相关的算法项目，长期奋斗一线参与设计和实现，同时也指导一些应届生和实习生。<br>
+        梦想是能搭建一整套数字人解决方案。<br>
+        长期服务业务，目前暂无发表。<br>
+        如果有幸加入支持学术转化的小组，十分荣幸。项目2 已撰写2篇paper，尝试投递。
       </p>
     </section>
 
     <section id="skills">
       <h2 class="section-title">技术栈</h2>
-      <p class="section-desc">以下是我常用的一些开发技术和工具。</p>
+      <p class="section-desc">以下是我的技术栈。</p>
       <div class="skills">
-        <div class="tag">HTML5</div>
-        <div class="tag">CSS3</div>
-        <div class="tag">JavaScript</div>
-        <div class="tag">TypeScript</div>
-        <div class="tag">React</div>
-        <div class="tag">Vue</div>
-        <div class="tag">Node.js</div>
-        <div class="tag">Python</div>
+        <div class="tag">digital avatar</div>
+        <div class="tag">CG / CV / 3DV</div>
+        <div class="tag">AIGC</div>
+        <div class="tag">distributed training</div>
+        <div class="tag">python</div>
+        <div class="tag">C / C++</div>
+        <div class="tag">pytorch</div>
         <div class="tag">Git / GitHub</div>
-        <div class="tag">Figma</div>
       </div>
     </section>
 
     <section id="projects">
       <h2 class="section-title">精选项目</h2>
-      <p class="section-desc">每个项目可以包含多张图片和多个视频，适合作品集展示。</p>
+<!--      <p class="section-desc">每个项目可以包含多张图片和多个视频，适合作品集展示。</p>-->
 
       <!-- 项目 1 -->
       <div class="project-block">
         <div class="project-header">
-          <h3>项目：单图 avatar 生成</h3>
+          <h3>项目1：标准人脸编辑</h3>
           <p>
-            为游戏动漫提供单图生成 avatar 的工具。支持高保真效果，适合作为角色头像、风格化展示和人物生成应用。
+            该项目收集、渲染了诸多数据集，通过微调Qwen-image完成了人脸物理分解的”大一桶“模型。<br>
+            价值：角色艺术创作，需要可视化人脸的诸多物理成分。如正视图、无遮挡图、均匀光影图、法向图等。<br>
+            欠缺：还缺一个恢复无表情的模块。
           </p>
 
           <div class="project-tags">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>AI</span>
-            <span>Avatar</span>
-          </div>
-
-          <div class="project-links">
-            <a href="#" target="_blank">在线预览</a>
-            <a href="#" target="_blank">GitHub 仓库</a>
+            <span>Image generation</span>
+<!--            <span>Lora</span>-->
+            <span>DPO</span>
+            <span>post training</span>
+            <span>Rendering</span>
+            <span>Data Cleaning</span>
           </div>
         </div>
-
-        <h4 class="gallery-title">项目图片</h4>
+<!--        <h4 class="gallery-title">单图Avatar生成</h4>-->
         <div class="gallery">
-          <a href="mats/pics/dreamface对比.png" target="_blank">
-            <img src="mats/pics/dreamface对比.png" alt="dreamface 对比图">
-          </a>
-          <a href="mats/pics/demo1.jpg" target="_blank">
-            <img src="mats/pics/demo1.jpg" alt="项目图片1">
-          </a>
-          <a href="mats/pics/demo2.jpg" target="_blank">
-            <img src="mats/pics/demo2.jpg" alt="项目图片2">
-          </a>
-          <a href="mats/pics/demo3.jpg" target="_blank">
-            <img src="mats/pics/demo3.jpg" alt="项目图片3">
-          </a>
+          <img src="mats/pics/标准编辑.png" alt="人脸正视+遮挡去除" onclick="openGallery(this, 0)">
+          <img src="mats/pics/物理分解.png" alt="人脸物理成分" onclick="openGallery(this, 1)">
         </div>
 
-        <h4 class="video-title">项目视频</h4>
-        <div class="video-list">
-          <div class="video-item">
-            <h4>演示视频 1</h4>
-            <video controls>
-              <source src="videos/demo1.mp4" type="video/mp4">
-              你的浏览器不支持 video 标签。
-            </video>
-          </div>
-
-          <div class="video-item">
-            <h4>演示视频 2</h4>
-            <video controls>
-              <source src="videos/demo2.mp4" type="video/mp4">
-              你的浏览器不支持 video 标签。
-            </video>
-          </div>
-        </div>
-      </div>
-
-      <!-- 项目 2 -->
-      <div class="project-block">
         <div class="project-header">
-          <h3>项目：数据可视化平台</h3>
+          <h3>项目2：单图 Avatar 生成</h3>
           <p>
-            一个用于展示多维数据分析结果的数据可视化平台，支持图表展示、页面交互和结果分析。
+            该项目使单图生成工业级avatar成为可能。生成的Avatar ID相似性高，布线平顺可绑骨，支持MetaHuman拓扑--导入UE可直接演绎表情。<br>
+            该项目完成度高，效果远超所有竞品，如有商用落地需求，随时可快速复现。
           </p>
 
           <div class="project-tags">
-            <span>React</span>
-            <span>API</span>
-            <span>Visualization</span>
+            <span>Riglogic</span>
+            <span>Avatar</span>
+            <span>Optimization</span>
+            <span>CG geometry</span>
+            <span>Image editing</span>
           </div>
-
-          <div class="project-links">
-            <a href="#" target="_blank">在线预览</a>
-            <a href="#" target="_blank">GitHub 仓库</a>
-          </div>
-        </div>
-
-        <h4 class="gallery-title">项目图片</h4>
         <div class="gallery">
-          <a href="images/project2-1.jpg" target="_blank">
-            <img src="images/project2-1.jpg" alt="项目2图片1">
-          </a>
-          <a href="images/project2-2.jpg" target="_blank">
-            <img src="images/project2-2.jpg" alt="项目2图片2">
-          </a>
-          <a href="images/project2-3.jpg" target="_blank">
-            <img src="images/project2-3.jpg" alt="项目2图片3">
-          </a>
+          <img src="mats/pics/Avatar生成.png" alt="Avatar生成效果图" onclick="openGallery(this, 0)">
+          <img src="mats/pics/Avatar生成展示.png" alt="Avatar生成效果图" onclick="openGallery(this, 1)">
+          <img src="mats/pics/Avatar生成展示2.png" alt="Avatar生成效果图" onclick="openGallery(this, 2)">
+          <img src="mats/pics/布线展示.png" alt="Avatar布线效果" onclick="openGallery(this, 3)">
+          <img src="mats/pics/COMP_dreamface.png" alt="影眸科技 Dreamface 几何对比" onclick="openGallery(this, 4)">
+        </div>
+        </div>
+        <div class="project-header">
+          <h3>项目3：物理可控的视频生成</h3>
+          <p>
+            借鉴UE MetaHuman的人脸表情控制原理，全量微调wanx2.5，完成了物理可控的IA2V，口型对齐度有明显提升。<br>
+          </p>
+
+          <div class="project-tags">
+            <span>S2V</span>
+            <span>lip sync</span>
+            <span>facial mocap</span>
+            <span>pose estimation</span>
+          </div>
         </div>
 
-        <h4 class="video-title">项目视频</h4>
+<!--        <h4 class="video-title">项目视频</h4>-->
         <div class="video-list">
           <div class="video-item">
-            <h4>功能演示视频</h4>
-            <video controls>
-              <source src="videos/project2-demo.mp4" type="video/mp4">
-              你的浏览器不支持 video 标签。
-            </video>
+            <h4> </h4>
+            <div>Prompt:画面中的人物说道：“我以前没得选择，现在我想做一个好人”</div>
+
+
+            <div class="video-compare">
+              <div class="video-titles">
+                <div>sd2.0</div>
+                <div>ours</div>
+                <div>wanx2.7</div>
+              </div>
+
+              <video controls>
+                <source src="mats/vids/zuohaoren_res.mp4" type="video/mp4">
+                你的浏览器不支持 video 标签。
+              </video>
+            </div>
+          </div>
+          <div class="video-item">
+            <h4> </h4>
+            <div>Prompt:画面中的人物说道：“好啊，跟法官说，看他让不让你做好人”</div>
+
+
+            <div class="video-compare">
+              <div class="video-titles">
+                <div>sd2.0</div>
+                <div>ours</div>
+                <div>wanx2.7</div>
+              </div>
+
+              <video controls>
+                <source src="mats/vids/genfaguanshuo_res.mp4" type="video/mp4">
+                你的浏览器不支持 video 标签。
+              </video>
+            </div>
+          </div>
+          <div class="video-item">
+            <h4> </h4>
+            <div>Prompt:画面中的人物说道：“你好，欢迎光临，请问需要点什么”</div>
+
+
+            <div class="video-compare">
+              <div class="video-titles">
+                <div>sd2.0</div>
+                <div>ours</div>
+                <div>wanx2.7</div>
+              </div>
+
+              <video controls>
+                <source src="mats/vids/huanyingguanglin_res.mp4" type="video/mp4">
+                你的浏览器不支持 video 标签。
+              </video>
+            </div>
+          </div>
+          <div class="video-item">
+            <h4> </h4>
+            <div>Prompt:画面中的人物语气坚定地说：“打仗打的就是后勤”</div>
+
+
+            <div class="video-compare">
+              <div class="video-titles">
+                <div>sd2.0</div>
+                <div>ours</div>
+                <div>wanx2.7</div>
+              </div>
+
+              <video controls>
+                <source src="mats/vids/dahouqin_res.mp4" type="video/mp4">
+                你的浏览器不支持 video 标签。
+              </video>
+            </div>
+          </div>
+          <div class="video-item">
+            <h4> </h4>
+            <div>Prompt:画面中人物冷笑地威胁地说道：“现在，把箱子打开，别让我再说第二遍”</div>
+            <div class="video-compare">
+              <div class="video-titles">
+                <div>sd2.0</div>
+                <div>ours</div>
+                <div>wanx2.7</div>
+              </div>
+
+              <video controls>
+                <source src="mats/vids/xiangzi_res1.mp4" type="video/mp4">
+                你的浏览器不支持 video 标签。
+              </video>
+            </div>
           </div>
         </div>
       </div>
-
     </section>
 
     <section id="contact">
       <h2 class="section-title">联系我</h2>
       <div class="contact-box">
-        <p>邮箱：your_email@example.com</p>
-        <p>GitHub：<a href="https://github.com/你的用户名" target="_blank">https://github.com/你的用户名</a></p>
-        <p>博客 / 主页：<a href="#" target="_blank">https://your-site-link.com</a></p>
+        <p>略</p>
+<!--        <p>邮箱：your_email@example.com</p>-->
+<!--        <p>GitHub：<a href="https://github.com/你的用户名" target="_blank">https://github.com/你的用户名</a></p>-->
+<!--        <p>博客 / 主页：<a href="#" target="_blank">https://your-site-link.com</a></p>-->
       </div>
     </section>
   </main>
@@ -546,6 +732,179 @@
   <footer>
     © 2025 你的名字 · Portfolio Website · Powered by GitHub Pages
   </footer>
+
+  <!-- 图片弹窗 -->
+  <div id="imgModal" class="modal" onclick="handleModalBackground(event)">
+    <span class="modal-close" onclick="closeModal(event)">&times;</span>
+    <button class="modal-btn modal-prev" onclick="prevImage(event)">&#10094;</button>
+    <img id="modalImg" src="" alt="大图预览">
+    <button class="modal-btn modal-next" onclick="nextImage(event)">&#10095;</button>
+    <div id="modalCaption" class="modal-caption"></div>
+  </div>
+  <script>
+    let currentGalleryImages = [];
+    let currentIndex = 0;
+
+    let currentScale = 1;
+    const minScale = 0.5;
+    const maxScale = 4;
+
+    let translateX = 0;
+    let translateY = 0;
+
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let dragOriginX = 0;
+    let dragOriginY = 0;
+
+    function applyTransform() {
+      const modalImg = document.getElementById('modalImg');
+      modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+    }
+
+    function resetTransform() {
+      currentScale = 1;
+      translateX = 0;
+      translateY = 0;
+      applyTransform();
+    }
+
+    function openGallery(imgElement, index) {
+      const gallery = imgElement.closest('.gallery');
+      const images = gallery.querySelectorAll('img');
+
+      currentGalleryImages = Array.from(images).map(img => ({
+        src: img.src,
+        alt: img.alt || ''
+      }));
+
+      currentIndex = index;
+      updateModalImage();
+
+      const modal = document.getElementById('imgModal');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateModalImage() {
+      const modalImg = document.getElementById('modalImg');
+      const caption = document.getElementById('modalCaption');
+
+      modalImg.src = currentGalleryImages[currentIndex].src;
+      caption.textContent =
+        currentGalleryImages[currentIndex].alt ||
+        `${currentIndex + 1} / ${currentGalleryImages.length}`;
+
+      resetTransform();
+    }
+
+    function prevImage(event) {
+      event.stopPropagation();
+      currentIndex = (currentIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+      updateModalImage();
+    }
+
+    function nextImage(event) {
+      event.stopPropagation();
+      currentIndex = (currentIndex + 1) % currentGalleryImages.length;
+      updateModalImage();
+    }
+
+    function closeModal(event) {
+      if (event) event.stopPropagation();
+      document.getElementById('imgModal').style.display = 'none';
+      document.getElementById('modalImg').src = '';
+      document.body.style.overflow = 'auto';
+      resetTransform();
+      stopDragging();
+    }
+
+    function handleModalBackground(event) {
+      if (event.target.id === 'imgModal') {
+        closeModal();
+      }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      const modal = document.getElementById('imgModal');
+      if (modal.style.display !== 'flex') return;
+
+      if (event.key === 'Escape') {
+        closeModal();
+      } else if (event.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+        updateModalImage();
+      } else if (event.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % currentGalleryImages.length;
+        updateModalImage();
+      }
+    });
+
+    const modalImg = document.getElementById('modalImg');
+
+    // 滚轮缩放
+    modalImg.addEventListener('wheel', function(event) {
+      event.preventDefault();
+
+      if (event.deltaY < 0) {
+        currentScale += 0.1;
+      } else {
+        currentScale -= 0.1;
+      }
+
+      currentScale = Math.max(minScale, Math.min(maxScale, currentScale));
+      applyTransform();
+    });
+
+    modalImg.addEventListener('mousedown', function(event) {
+      if (currentScale <= 1) return;
+
+      event.preventDefault();
+
+      isDragging = true;
+      dragStartX = event.clientX;
+      dragStartY = event.clientY;
+      dragOriginX = translateX;
+      dragOriginY = translateY;
+
+      modalImg.classList.add('dragging');
+    });
+
+
+    // 鼠标移动时拖拽
+    document.addEventListener('mousemove', function(event) {
+      if (!isDragging) return;
+
+      const dx = event.clientX - dragStartX;
+      const dy = event.clientY - dragStartY;
+
+      translateX = dragOriginX + dx;
+      translateY = dragOriginY + dy;
+
+      applyTransform();
+    });
+
+    // 停止拖拽
+    function stopDragging() {
+      isDragging = false;
+      modalImg.classList.remove('dragging');
+    }
+
+    document.addEventListener('mouseup', stopDragging);
+    document.addEventListener('mouseleave', stopDragging);
+
+    // 双击恢复原始位置和缩放
+    modalImg.addEventListener('dblclick', function(event) {
+      event.stopPropagation();
+      resetTransform();
+    });
+
+    // 防止拖动图片触发浏览器默认行为
+    modalImg.addEventListener('dragstart', function(event) {
+      event.preventDefault();
+    });
+  </script>
 
 </body>
 </html>
